@@ -1,0 +1,8 @@
+1. non functionality
+
+multi user system : more than 3 users
+
+only login user is able to create, delete, or makes change to the his recipes
+
+personal information other than display names cannot be declose to other users.
+
