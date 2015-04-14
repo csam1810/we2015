@@ -1,0 +1,18 @@
+following tables should have an own key which is not in the class 
+diagramm:
+recipe, ingredient, list, mealplan, meals
+not relevant:
+user: userid is email adress
+timeslots, days, weightUnit, difficultyType: 
+id is defined for each dataset (not automatically assigned)
+
+days: dayID: String with MO until SU as keys
+timeslot: slotID Character with 1 Letter b for breakfast, etc.
+weightUnit shortName = string like kg for kilogram
+difficulties: integer in order of difficulty, like 1 for simple
+
+
+
+creation date not in class diagram, should be added in all tables
+
+
