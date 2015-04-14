@@ -1,0 +1,65 @@
+Hi,
+you only need to read that if you want to know what my ideas are and 
+what needs to be done in my opinion by midterm except for the next 2 points.
+
+1) Do you an idea for a name of the business Object? 
+
+@Alex in the Software Entwurf lecture we should have called the 
+"Geschäftsklasse / Business object" PlayGame
+
+-> split it up later
+
+2) Please have a look at the methods in the class diagram specially for 
+user and recipe and business Object. The question is if there are 
+methods which have to be in the business object. I decided to put them 
+to the classes itself when the concrete object is necessary for the 
+method like getRecipeCreatedByUser() is in class user or favoriteRecipe() 
+is in user as well because the user object is already known and ther is 
+no need to give it as parameter to the business object. But I can be 
+wrong and both methods should be in the business objects.
+
+
+As I said in the email before I don't provide additional methods for the 
+admin user. There are no changing methods for ingredients or recipes.
+
+
+my assumption - please tell me if you have another opinion
+- getter / setter methods don't need to be mentioned - ok
+- used enum classes even where we want keys like B for timeslot 
+  breakfast or MO for day monday - we will do that in the database
+  ok
+- I provide a lot of parameters but it is not complee, 1 reason is 
+  that they are too long like createRecipe() or the issue with the meal - 
+  see in the todos
+  
+  ok, used dummy parameters too
+  
+- I have a getShopplingList() method with parameter for 1 recipe. 
+ok
+  If we realise that for several recipes we use a array of recipes and 
+  add the amounts of ingredients. But there is no additional method.
+not in the project any more
+
+todos in the class diagram until midterm:
+- businessObject need another name -> split it up
+- all methods are public, there should be only IF / business object 
+  methods which are public - a lot methods need to be added
+- I tried to find out how to do the n-ary relations. I found in the 
+internet in a presentation that there should be a relation attribute 
+but I don't know how to manage that or if this is even possible in 
+magigDraw. I had a short look at the UML definition but I will look 
+into that. But not until wednesday.
+The use of the composition should show that the relation is dependent 
+on the pointed object (mealplan and recipe). But in the case of the 
+recipe the ingredient itself are not dependent on the recipe. 
+I am not sure if this is correct as well as the relationship name and 
+the cardinality. But in my opionion this is really good enough for 
+wednesday and I can argue why I did it that way if he asks.
+- Instead of the meal class I use the n-ary relation. The reason was 
+that the meal itself is just technical stuff. But this causes problems 
+with the removeMeal() method because now I need an object.
+- type for picture is missing - used byte
+
+I will upload the magicDraw file now, I could not export the class diagram to a useful format. Printing to pdf was not possible.
+Bye
+Carmen 

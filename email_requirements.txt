@@ -1,0 +1,46 @@
+hi,
+I went over all the requirements we have in the requirement tool by now.
+I changed what we discussed today in my parts and removed the comments about creation date and unique ids in my parts.
+
+
+@ Alex: Your parts are not there yet but I guess / hope that there is no influence on the class diagram. When you fill them in please let me know if there are parts which have an influence on it.
+
+
+@Daly: I found entries where I don't know what you mean or I see it differentely. So there might be understanding problems or inconsistencies, etc. Please let me know what you think.
+I copied the requirements into the email to make sure we talk about the same topics.
+
+a) "AF9 Create a personal list of recipes: When a user creates a new recipe, the operations include submitting the recipe?s data to the server, verifying the data (eg, checks if there is a duplicate name), add new recipe to the database."
+
+In my opinion the title is not correct. This should be only the creation of a recipe which has nothing to do with personal list. But DF7 Create recipe would have the same content.
+
+b) "DNF4: The user can maintain or make changes to the list only if the user has been verified as an admin by logging in."
+
+In my opinion the add and remove of a recipe is allowed for a logged-in user.
+But there is already the requirement "Add recipe to recipe list".
+Do you mean something else?
+
+c) "DF5: Maintain provided ingredient list: When a user (admin) maintain provided ingredient list, the operations include sending the edited id to the server, updating the ingredient in the database."
+
+Do you mean that only the admin or all user can do that?
+We agreed 2 weeks ago that logged-in user can create new ingredients as a medium requirements. If you agree to that, then the admin is not necessary because admin can do whatever other user can do.
+
+Can we please try to use the list only for the real list? In DF5 you use it for the provided ingredients.
+
+
+d) "DNF6: The user can only upload new recipes which are not the duplicate recipes in his recipes list."
+
+What do you mean by upload? Do you mean create?
+
+e) "DF8: Change display name: The log-in-user is able to change their display name"
+In my opionion this is an old requirement and we decided last week that we will not provide that.
+
+f) the following parts are low requirements - we decided that 2 weeks ago but in my opinion they are not yet in the requirements:
+- other recipe lists (low requirement)
+- shopping list for serveral recipes
+
+g) As we agreed today I will not provide any methods only for admin in the class diagram. So I ignore the requirements
+deleteRecipe, deleteUser, update Ingredient, delete Ingredient (2 times in the requirements)
+In my opionion we should remove them from the requirements because we do not plan to do that. But perhaps I implied that because I did not remember that we discussed that.
+
+I will write another email with my remarks for the class diagram itself.
+Please tell me specially when my assumptions are wrong and you think that I need to add stuff to the class diagram.
