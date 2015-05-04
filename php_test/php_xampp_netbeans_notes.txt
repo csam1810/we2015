@@ -1,0 +1,75 @@
+XAMPP:
+- Download: I used version 5.6.8 (comes with PHP version 5.6.8)
+https://www.apachefriends.org/download.html
+
+- follow instructions to install: 
+https://www.apachefriends.org/faq_linux.html
+
+Used IDE: NetBeans 8.0.2
+
+___________________
+
+All the XAMPP files will be located in the folder /opt/lampp. The php, html etc. files are supposed to be in the folder /opt/lampp/htdocs. Unfortunately this one is read-only. So, to solve this problem, first create a new folder inside the htdocs folder using sudo:
+
+sudo mkdir MYLE
+
+Then give the folder the necessary rights: 
+
+sudo chmod 777 MYLE/
+
+In NetBeans IDE, when asked where to put the source files of the new PHP-Project, choose this folder. You can then simply use the run button in NetBeans IDE to start your application (you need an index.php file if it is not there per default). Also, don't forget to start the server, see the XAMPP documentation. 
+
+IMPORTANT: Also, make sure the server started by XAMPP is the ONLY server, and that no other is running in the background (over e.g. NetBeans).
+
+Note: It can take some time to display the web page after you've pressed the run-button in NetBeans.
+
+________________________________
+
+Zend framework:
+In NetBeans-> Tools -> Options -> PHP -> Frameworks & Tools -> Zend 2:
+Download the Skeleton Application from the link provided and set the path
+To be able to use Zend, we need to install the Dependency Manager "Composer". To do this, choose a directory you want the manager installed and execute the following command:
+
+php -r "readfile('https://getcomposer.org/installer');" | php
+
+You can then choose the Zend2 framework during project creation. If it asks you for the composer, give the path to the location you installed it to.
+
+___________
+
+Then you need to locate your httpd.conf file (usually /opt/lampp/etc) and add the following text in the "Main Server Configuration"
+
+ <VirtualHost *:80>
+     ServerName www.myle.com
+     DocumentRoot /opt/lampp/htdocs/MYLE/public
+     SetEnv APPLICATION_ENV "development"
+     <Directory /opt/lampp/htdocs/MYLE/public>
+         DirectoryIndex index.php
+         AllowOverride All
+         Order allow,deny
+         Allow from all
+     </Directory>
+ </VirtualHost>
+ 
+Then switch to the ~/etc directory and add the following to the "hosts" file:
+
+127.0.0.1	www.myle.com
+
+Then change back to the /opt/lampp folder and type:
+
+sudo ./lampp restart
+
+to restart the server.
+
+As a last step, go back to NetBeans, click the menu-option Run->Set Project Configuration -> Customize... and set the Project URL to
+
+http://www.myle.com
+
+You should see a page displaing "Welcome to Zend Framework..."
+
+________________________________
+
+Customizing the skelton application
+
+I've followed this tutorial:
+http://framework.zend.com/manual/current/en/user-guide/overview.html
+
