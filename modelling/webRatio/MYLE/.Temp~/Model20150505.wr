@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?webml version="4.0.3"?>
+<WebProject xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:db="http://www.webratio.com/2006/WebML/Database" xmlns:wrxsd="http://www.webratio.com/2012/WebML/WRXSD" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" xmlns:temp="http://www.webratio.com/2006/WebML/Temp" xmlns:bpm="http://www.webratio.com/2009/WebML/BPM" outputPath="${webapps_loc}/${project_name}" gr:showUnitContent="true" gr:showTooltip="true" httpPort="8080" httpsPort="8443" enableProjectDependencies="false" jobGroupName="WEBRATIO" wrTempNewProject="true" control="R3Vlc3RMb2dnZWQtSW4gVXNlcg==">  
+  <ServiceDataProviders/>  
+  <DataModel> 
+    <Entity id="User" name="User" duration="persistent" gr:x="210" gr:y="40" gr:hideAttributes="false" attributeOrder="userOID email userName password att21"> 
+      <Attribute name="userID" id="userOID" type="integer" key="true"/>  
+      <Attribute name="displayName" id="userName" type="string" key="false"/>  
+      <Attribute name="pw" id="password" type="password" key="false"/>  
+      <Attribute name="email" id="email" type="string" key="false"/>  
+      <Attribute id="att21" name="telnr" type="string" key="false"/> 
+    </Entity>  
+    <Entity id="Group" name="Group" duration="persistent" gr:x="505" gr:y="45" gr:hideAttributes="false" attributeOrder="groupOID groupName"> 
+      <Attribute name="oid" id="groupOID" type="integer" key="true"/>  
+      <Attribute name="groupName" id="groupName" type="string"/> 
+    </Entity>  
+    <Entity id="Module" name="Module" duration="persistent" gr:x="790" gr:y="40" gr:hideAttributes="false" attributeOrder="moduleOID moduleID moduleName"> 
+      <Attribute name="oid" id="moduleOID" type="integer" key="true"/>  
+      <Attribute name="moduleID" id="moduleID" type="string"/>  
+      <Attribute name="moduleName" id="moduleName" type="string"/> 
+    </Entity>  
+    <Relationship id="User2Group_Group2User" name="User_Group" sourceEntity="User" targetEntity="Group"> 
+      <RelationshipRole1 id="User2Group" name="groups" maxCard="N"/>  
+      <RelationshipRole2 id="Group2User" name="users" maxCard="N"/> 
+    </Relationship>  
+    <Relationship id="User2DefaultGroup_DefaultGroup2User" name="User_DefaultGroup" sourceEntity="User" targetEntity="Group" gr:bendpoints="113,42,-112,44"> 
+      <RelationshipRole1 id="User2DefaultGroup" name="defaultGroup" maxCard="1"/>  
+      <RelationshipRole2 id="DefaultGroup2User" name="defaultUsers" maxCard="N"/> 
+    </Relationship>  
+    <Relationship id="Group2DefaultModule_DefaultModule2Group" name="Group_DefaultModule" sourceEntity="Group" targetEntity="Module"> 
+      <RelationshipRole1 id="Group2DefaultModule" name="defaultModule" maxCard="1"/>  
+      <RelationshipRole2 id="DefaultModule2Group" name="defaultGroups" maxCard="N"/> 
+    </Relationship>  
+    <Relationship id="Group2Module_Module2Group" name="Group_Module" sourceEntity="Group" targetEntity="Module" gr:bendpoints="110,41,-115,41"> 
+      <RelationshipRole1 id="Group2Module" name="modules" maxCard="N"/>  
+      <RelationshipRole2 id="Module2Group" name="groups" maxCard="N"/> 
+    </Relationship>  
+    <Entity gr:x="500" gr:y="440" id="ent2" name="Recipe" duration="persistent" attributeOrder="att5 att6 att7 att8 att9"> 
+      <Attribute id="att5" key="true" name="recipeID" type="integer"/>  
+      <Attribute id="att6" name="recipeName" type="string"/>  
+      <Attribute id="att7" name="duration" type="integer"/>  
+      <Attribute id="att8" name="instructions" type="string"/>  
+      <Attribute id="att9" name="picture" type="blob"/> 
+    </Entity>  
+    <Relationship id="rel1" name="Recipe_User" sourceEntity="ent2" targetEntity="User"> 
+      <RelationshipRole1 id="role1" name="RecipeToUser" maxCard="1"/>  
+      <RelationshipRole2 id="role2" name="owner" maxCard="N"/> 
+    </Relationship>  
+    <Entity gr:x="485" gr:y="680" id="ent3" name="Difficulties" duration="persistent" attributeOrder="att10 att11"> 
+      <Attribute id="att10" key="true" name="difficultyID" type="string"/>  
+      <Attribute id="att11" name="difficultyName" type="string"/> 
+    </Entity>  
+    <Relationship id="rel3" name="difficulty" sourceEntity="ent2" targetEntity="ent3"> 
+      <RelationshipRole1 id="role5" name="RecipeToDifficulties" maxCard="1"/>  
+      <RelationshipRole2 id="role6" name="DifficultiesToRecipe" maxCard="N"/> 
+    </Relationship>  
+    <Entity gr:x="485" gr:y="250" id="ent4" name="List" duration="persistent" attributeOrder="att13 att14 att15"> 
+      <Attribute id="att13" key="true" name="listID" type="integer"/>  
+      <Attribute id="att14" name="listName" type="string"/>  
+      <Attribute id="att15" name="listDescription" type="string"/> 
+    </Entity>  
+    <Relationship id="rel4" name="recipes" sourceEntity="ent4" targetEntity="ent2"> 
+      <RelationshipRole1 id="role7" name="ListToRecipe" maxCard="N"/>  
+      <RelationshipRole2 id="role8" name="RecipeToList" maxCard="N"/> 
+    </Relationship>  
+    <Entity gr:x="60" gr:y="270" id="ent5" name="Ingredient" duration="persistent" attributeOrder="att16 att17"> 
+      <Attribute id="att16" key="true" name="ingredientID" type="integer"/>  
+      <Attribute id="att17" name="ingredientName" type="string"/> 
+    </Entity>  
+    <Relationship id="rel5" name="List_User" sourceEntity="ent4" targetEntity="User"> 
+      <RelationshipRole1 id="role9" name="owner" maxCard="1"/>  
+      <RelationshipRole2 id="role10" name="UserToList" maxCard="1"/> 
+    </Relationship>  
+    <Entity gr:x="85" gr:y="675" id="ent6" name="WeightUnits" duration="persistent" attributeOrder="att12 att18"> 
+      <Attribute id="att12" key="true" name="unitID" type="string"/>  
+      <Attribute id="att18" name="unitName" type="string"/> 
+    </Entity>  
+    <Entity gr:x="25" gr:y="475" id="ent7" name="IngredientsOfRecipe" duration="persistent" attributeOrder="att19 att20"> 
+      <Attribute id="att19" key="true" name="ingredientsOfRecipeID" type="integer"/>  
+      <Attribute id="att20" name="amount" type="float"/> 
+    </Entity>  
+    <Relationship id="rel6" name="IngredientsOfRecipe_Ingredient" sourceEntity="ent7" targetEntity="ent5"> 
+      <RelationshipRole1 id="role11" name="ingredient" maxCard="1"/>  
+      <RelationshipRole2 id="role12" name="IngredientToIngredientsOfRecipe" maxCard="N"/> 
+    </Relationship>  
+    <Relationship id="rel7" name="IngredientsOfRecipe_Recipe" sourceEntity="ent7" targetEntity="ent2"> 
+      <RelationshipRole1 id="role13" name="recipe" maxCard="1"/>  
+      <RelationshipRole2 id="role14" name="RecipeToIngredientsOfRecipe" maxCard="N"/> 
+    </Relationship>  
+    <Relationship id="rel8" name="IngredientsOfRecipe_WeightUnits" sourceEntity="ent7" targetEntity="ent6"> 
+      <RelationshipRole1 id="role15" name="unit" maxCard="1"/>  
+      <RelationshipRole2 id="role16" name="WeightUnitsToIngredientsOfRecipe" maxCard="N"/> 
+    </Relationship> 
+  </DataModel>  
+  <WebModel defaultLocale="lcl1" layout:style="WebRatio" layout:inheritParameters="true" edtLvl="WebRatio Community Platform # 20150425" edtLvlCtrl="V2ViUmF0aW8gQ29tbXVuaXR5IFBsYXRmb3JtICMgMjAxNTA0MjVDb3VudHJ5SVNPQ3R4UGFyYW1Hcm91cEN0eFBhcmFtTGFuZ3VhZ2VJU09DdHhQYXJhbVVzZXJDdHhQYXJhbQ==" homeSiteView="sv2"> 
+    <Locale id="lcl1" country="US" language="en"> 
+      <PatternConfiguration type="boolean" pattern="yes|no"/>  
+      <PatternConfiguration type="decimal" useNumberPattern="false" maxDecimal="3" minDecimal="0" minInteger="1" useThousandSeparator="true"/>  
+      <PatternConfiguration type="date" pattern="M/d/yy"/>  
+      <PatternConfiguration type="float" useNumberPattern="false" maxDecimal="3" minDecimal="0" minInteger="1" useThousandSeparator="true"/>  
+      <PatternConfiguration type="integer" useNumberPattern="false" minInteger="1" useThousandSeparator="true"/>  
+      <PatternConfiguration type="time" pattern="h:mm:ss a"/>  
+      <PatternConfiguration type="timestamp" pattern="M/d/yy h:mm:ss a"/> 
+    </Locale>  
+    <ContextParameter id="UserCtxParam" name="UserCtxParam" entity="User" type="entity"/>  
+    <ContextParameter id="GroupCtxParam" name="GroupCtxParam" entity="Group" type="entity"/>  
+    <ContextParameter id="LanguageISOCtxParam" name="LanguageISOCtxParam" type="string"/>  
+    <ContextParameter id="CountryISOCtxParam" name="CountryISOCtxParam" type="string"/>  
+    <SiteView id="sv2" name="Guest" landmarks="area1" homePage="page12"> 
+      <OperationUnits/>  
+      <Area gr:x="35" gr:y="20" id="area1" name="MYLE - Main Area" landmark="true" landmarks="area2 area3"> 
+        <OperationUnits/>  
+        <Area gr:x="0" gr:y="0" id="area2" name="Header" landmark="true" landmarks="area4" defaultPage="page5"> 
+          <OperationUnits/>  
+          <Page gr:x="0" gr:y="0" id="page5" name="Menu"> 
+            <ContentUnits> 
+              <EntryUnit gr:x="0" gr:y="0" id="enu5" name="Search for Recipe" linkOrder="ln22"> 
+                <Link id="ln22" name="Get recipes for name" to="pwu2" type="normal" automaticCoupling="true" validate="true"/> 
+              </EntryUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="enu5"> 
+                    <layout:Link link="ln22"/> 
+                  </layout:Unit> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid> 
+          </Page>  
+          <Area gr:x="285" gr:y="0" id="area4" name="Login/Logout" landmark="true" defaultPage="page6"> 
+            <OperationUnits/>  
+            <Page gr:x="0" gr:y="0" id="page6" name="Login" linkOrder="ln15"> 
+              <ContentUnits/>  
+              <layout:Grid containerType="grid"> 
+                <layout:Row> 
+                  <layout:Cell colspan="12"/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/> 
+                </layout:Row> 
+              </layout:Grid>  
+              <Link id="ln15" name="Click Login button" to="page14" automaticCoupling="true" type="normal" validate="true"/> 
+            </Page> 
+          </Area> 
+        </Area>  
+        <Area gr:x="10" gr:y="225" id="area3" name="Content" landmark="true" defaultPage="page12"> 
+          <OperationUnits> 
+            <CreateUnit gr:x="295" gr:y="245" id="cru2" name="CreateUser" entity="User" skipBlankRecords="true" notBlankAttributes="email password userName"/> 
+          </OperationUnits>  
+          <Page gr:x="0" gr:y="220" id="page13" name="Detailed Recipe View" linkOrder="ln11"> 
+            <ContentUnits> 
+              <DataUnit gr:x="0" gr:y="0" id="dau4" name="Recipe Details" entity="ent2"> 
+                <Selector id="su5" defaultPolicy="fill" booleanOperator="and"> 
+                  <KeyCondition id="kcond5" name="KeyCondition5" predicate="in" implied="false"/> 
+                </Selector> 
+              </DataUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="dau4"/> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid>  
+            <Link id="ln11" name="Return to list of recipes" to="page12" automaticCoupling="true" type="normal" validate="true"/> 
+          </Page>  
+          <Page gr:x="5" gr:y="0" id="page12" name="List of recipes"> 
+            <ContentUnits> 
+              <PowerIndexUnit gr:x="0" gr:y="0" id="pwu2" name="Recipe names" sortable="true" checkable="false" useCountQuery="false" linkOrder="ln9" entity="ent2"> 
+                <Link id="ln9" name="Flow 9" to="dau4" automaticCoupling="true" type="normal" validate="true" customDescriptor="false"/> 
+              </PowerIndexUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="pwu2"> 
+                    <layout:Link link="ln9"/> 
+                  </layout:Unit> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid> 
+          </Page>  
+          <Page gr:x="255" gr:y="0" id="page14" name="Login/Register"> 
+            <ContentUnits> 
+              <EntryUnit gr:x="0" gr:y="0" id="enu3" name="UserID, Pw"/>  
+              <EntryUnit gr:x="0" gr:y="80" id="enu4" name="User information" linkOrder="ln12"> 
+                <Link id="ln12" name="Click Register button" to="cru2" automaticCoupling="true" type="normal" validate="true"/> 
+              </EntryUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="enu3"/> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row>  
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="enu4"> 
+                    <layout:Link link="ln12"/> 
+                  </layout:Unit> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid> 
+          </Page> 
+        </Area> 
+      </Area> 
+    </SiteView>  
+    <SiteView id="sv3" name="Logged-In User" landmarks="area6" homePage="page17"> 
+      <OperationUnits/>  
+      <Area id="area6" name="MYLE - Main Area" landmarks="area7 area9" landmark="true" gr:x="30" gr:y="-45"> 
+        <OperationUnits/>  
+        <Area id="area7" name="Header" defaultPage="page15" landmarks="area8" landmark="true" gr:x="0" gr:y="0"> 
+          <OperationUnits/>  
+          <Page id="page15" name="Menu" gr:x="0" gr:y="0" linkOrder="ln25 ln27"> 
+            <ContentUnits> 
+              <EntryUnit id="enu6" name="Search for Recipe" gr:x="0" gr:y="0" linkOrder="ln29"> 
+                <Link id="ln29" name="Get recipes for name" to="pwu3" type="normal" automaticCoupling="true" validate="true"/> 
+              </EntryUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="enu6"> 
+                    <layout:Link link="ln29"/> 
+                  </layout:Unit> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row>  
+              <layout:Row> 
+                <layout:Cell colspan="12"/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid>  
+            <Link id="ln25" name="Create Recipe" to="page20" automaticCoupling="true" type="normal" validate="true"/>  
+            <Link id="ln27" name="View Favorite List" to="page17" automaticCoupling="true" type="normal" validate="true"/> 
+          </Page>  
+          <Area id="area8" name="Login/Logout" defaultPage="page16" landmark="true" gr:x="225" gr:y="0"> 
+            <OperationUnits/>  
+            <Page gr:x="180" gr:y="5" id="page1" name="Logout" linkOrder="ln1"> 
+              <ContentUnits> 
+                <DataUnit gr:x="0" gr:y="0" id="dau1" name="DisplayName" entity="User"> 
+                  <Selector id="su9" defaultPolicy="fill" booleanOperator="and"> 
+                    <KeyCondition id="kcond9" name="KeyCondition9" predicate="in" implied="false"/> 
+                  </Selector> 
+                </DataUnit> 
+              </ContentUnits>  
+              <layout:Grid containerType="grid"> 
+                <layout:Row> 
+                  <layout:Cell colspan="12"> 
+                    <layout:Unit unitId="dau1"/> 
+                  </layout:Cell>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/> 
+                </layout:Row> 
+              </layout:Grid>  
+              <Link id="ln1" name="Logout" to="page16" automaticCoupling="true" type="normal" validate="true"/> 
+            </Page>  
+            <Page id="page16" name="Login" linkOrder="ln17" gr:x="0" gr:y="0"> 
+              <ContentUnits/>  
+              <layout:Grid containerType="grid"> 
+                <layout:Row> 
+                  <layout:Cell colspan="12"/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/>  
+                  <layout:Cell/> 
+                </layout:Row> 
+              </layout:Grid>  
+              <Link id="ln17" name="Click Login button" to="page19" type="normal" automaticCoupling="true" validate="true"/> 
+            </Page> 
+          </Area> 
+        </Area>  
+        <Area id="area9" name="Content" defaultPage="page17" landmark="true" gr:x="10" gr:y="305"> 
+          <OperationUnits> 
+            <CreateUnit id="cru3" name="CreateUser" gr:x="310" gr:y="290" bulk="false" entity="User" skipBlankRecords="true" notBlankAttributes="email password userName"> 
+              <OKLink id="oln3" name="User creation successful" to="page17" automaticCoupling="true"/>  
+              <KOLink id="kln1" name="User creation unsuccessful" to="page21" automaticCoupling="true" gr:bendpoints="100,81,-365,56;328,80,-137,55"/> 
+            </CreateUnit>  
+            <CreateUnit gr:x="510" gr:y="170" id="cru4" name="CreateRecipe" entity="ent2" bulk="false" protected="false"> 
+              <OKLink id="oln4" name="Recipe creation" to="cnu2" automaticCoupling="true"/>  
+              <KOLink id="kln2" name="Recipe creation unsuccessful" to="page21" automaticCoupling="true"/> 
+            </CreateUnit>  
+            <ConnectUnit gr:x="350" gr:y="485" id="cnu1" name="Add recipe to favorites" relationship="role8"> 
+              <SourceSelector id="su7" defaultPolicy="fill" booleanOperator="and"> 
+                <KeyCondition id="kcond7" name="KeyCondition7" predicate="in" implied="false"/> 
+              </SourceSelector>  
+              <TargetSelector id="su8" defaultPolicy="fill" booleanOperator="and"> 
+                <KeyCondition id="kcond8" name="KeyCondition8" predicate="in" implied="false"/> 
+              </TargetSelector>  
+              <OKLink id="oln5" name="Recipe added to favorites" to="page18" automaticCoupling="true" gr:bendpoints="-168,-70,172,160"/>  
+              <KOLink id="kln3" name="Recipe could not be added to favorites" to="page21" automaticCoupling="true" gr:bendpoints="215,-87,-160,98"/> 
+            </ConnectUnit>  
+            <CreateUnit gr:x="750" gr:y="30" id="cru5" name="CreateIngredient" entity="ent5"> 
+              <OKLink id="oln6" name="Creation of ingredient successful" to="page20" automaticCoupling="true" gr:bendpoints="-120,-20,125,-10"/>  
+              <KOLink id="kln4" name="Creation of ingredient unsuccessful" to="page21" automaticCoupling="true"/> 
+            </CreateUnit>  
+            <ConnectUnit gr:x="470" gr:y="290" id="cnu2" name="Connect Recipe To User" relationship="role1"> 
+              <SourceSelector id="su1" defaultPolicy="fill" booleanOperator="and"> 
+                <KeyCondition id="kcond1" name="KeyCondition1" predicate="in" implied="false"/> 
+              </SourceSelector>  
+              <TargetSelector id="su2" defaultPolicy="fill" booleanOperator="and"> 
+                <KeyCondition id="kcond2" name="KeyCondition2" predicate="in" implied="false"/> 
+              </TargetSelector>  
+              <OKLink id="oln1" name="OKFlow1" to="cnu3" automaticCoupling="true"/>  
+              <KOLink id="kln6" name="KOFlow6" to="page21" automaticCoupling="true" gr:bendpoints="142,-22,-113,-32"/> 
+            </ConnectUnit>  
+            <ConnectUnit gr:x="650" gr:y="480" id="cnu3" name="Connect Ingredients to Recipe" relationship="role13"> 
+              <SourceSelector id="su3" defaultPolicy="fill" booleanOperator="and"> 
+                <KeyCondition id="kcond3" name="KeyCondition3" predicate="in" implied="false"/> 
+              </SourceSelector>  
+              <TargetSelector id="su4" defaultPolicy="fill" booleanOperator="and"> 
+                <KeyCondition id="kcond4" name="KeyCondition4" predicate="in" implied="false"/> 
+              </TargetSelector>  
+              <OKLink id="oln2" name="OKFlow2" to="dau5" automaticCoupling="true"/>  
+              <KOLink id="kln5" name="KOFlow5" to="page21" automaticCoupling="true"/> 
+            </ConnectUnit> 
+          </OperationUnits>  
+          <Page gr:x="500" gr:y="0" id="page20" name="Create Recipe"> 
+            <ContentUnits> 
+              <EntryUnit gr:x="0" gr:y="0" id="enu9" name="Recipe Data" linkOrder="ln24 ln32"> 
+                <Link id="ln24" name="Click create recipe button" to="cru4" automaticCoupling="true" type="normal" validate="true"/>  
+                <Link id="ln32" name="Create new ingredient" to="cru5" automaticCoupling="true" type="normal" validate="true"/> 
+              </EntryUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="enu9"> 
+                    <layout:Link link="ln24"/>  
+                    <layout:Link link="ln32"/> 
+                  </layout:Unit> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid> 
+          </Page>  
+          <Page id="page18" name="Detailed Recipe View" linkOrder="ln19 ln30 ln3 ln5" gr:x="0" gr:y="230"> 
+            <ContentUnits> 
+              <DataUnit id="dau5" name="Recipe Details" gr:x="0" gr:y="0" entity="ent2"> 
+                <Selector id="su6" defaultPolicy="fill" booleanOperator="and"> 
+                  <KeyCondition id="kcond6" name="KeyCondition5" predicate="in" implied="false"/> 
+                </Selector> 
+              </DataUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="dau5"/> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid>  
+            <Link id="ln19" name="Return to list of recipes" to="page17" type="normal" automaticCoupling="true" validate="true"/>  
+            <Link id="ln30" name="Click add recipe to favorites button" to="cnu1" automaticCoupling="true" type="normal" validate="true"/>  
+            <Link id="ln3" name="Download recipe" to="page2" automaticCoupling="true" type="normal" validate="true"/>  
+            <Link id="ln5" name="Download Shopping List" to="page2" automaticCoupling="true" type="normal" validate="true" gr:bendpoints="-40,113,-40,-112"/> 
+          </Page>  
+          <Page id="page17" name="List of recipes" gr:x="5" gr:y="20"> 
+            <ContentUnits> 
+              <PowerIndexUnit id="pwu3" name="Recipe names" linkOrder="ln18" gr:x="0" gr:y="0" sortable="true" checkable="false" useCountQuery="false" entity="ent2"> 
+                <Link id="ln18" name="Click a recipe" to="dau5" type="normal" customDescriptor="false" automaticCoupling="true" validate="true"/> 
+              </PowerIndexUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="pwu3"> 
+                    <layout:Link link="ln18"/> 
+                  </layout:Unit> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid> 
+          </Page>  
+          <Page id="page19" name="Login/Register" gr:x="270" gr:y="20" linkOrder="ln2"> 
+            <ContentUnits> 
+              <EntryUnit id="enu7" name="UserID, Pw" gr:x="0" gr:y="0" linkOrder="ln31"> 
+                <Link id="ln31" name="Click Login button" to="page17" automaticCoupling="true" type="normal" validate="true"/> 
+              </EntryUnit>  
+              <EntryUnit id="enu8" name="User information" linkOrder="ln20" gr:x="0" gr:y="80"> 
+                <Link id="ln20" name="Click Register button" to="cru3" type="normal" automaticCoupling="true" validate="true"/> 
+              </EntryUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="enu7"> 
+                    <layout:Link link="ln31"/> 
+                  </layout:Unit> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row>  
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="enu8"> 
+                    <layout:Link link="ln20"/> 
+                  </layout:Unit> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid>  
+            <Link id="ln2" name="UserInformation" to="dau1" automaticCoupling="true" type="normal" validate="true"/> 
+          </Page>  
+          <Page gr:x="0" gr:y="475" id="page2" name="Download Result"> 
+            <ContentUnits> 
+              <MultiMessageUnit gr:x="0" gr:y="0" id="mssu2" name="Download Result Msg" linkOrder="ln6"> 
+                <Link id="ln6" name="Return to Detailed Recipe View" to="page18" automaticCoupling="true" type="normal" validate="true" gr:bendpoints="42,-99,42,136"/> 
+              </MultiMessageUnit> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="mssu2"> 
+                    <layout:Link link="ln6"/> 
+                  </layout:Unit> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid> 
+          </Page>  
+          <Page gr:x="745" gr:y="295" id="page21" name="Error"> 
+            <ContentUnits> 
+              <MultiMessageUnit gr:x="0" gr:y="0" id="mssu1" name="Error Message"/> 
+            </ContentUnits>  
+            <layout:Grid containerType="grid"> 
+              <layout:Row> 
+                <layout:Cell colspan="12"> 
+                  <layout:Unit unitId="mssu1"/> 
+                </layout:Cell>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/>  
+                <layout:Cell/> 
+              </layout:Row> 
+            </layout:Grid> 
+          </Page> 
+        </Area> 
+      </Area> 
+    </SiteView> 
+  </WebModel>
+</WebProject>
