@@ -81,6 +81,7 @@ You should see a page displaing "Welcome to Zend Framework..."
 ________________________________
 To access our application, type: www.myle.com/recipe
 To access phpmyadmin, type: localhost/phpmyadmin
+
 ________________________________
 
 Customizing the skelton application
